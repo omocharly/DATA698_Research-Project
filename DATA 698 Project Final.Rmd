@@ -1,0 +1,499 @@
+---
+title: "DATA698 Project - Final Project"
+author: "Charles Ugiagbe"
+date: "12/13/2024"
+output:
+  html_document:
+    includes:
+    css: ./lab.css
+    highlight: pygments
+    theme: cerulean
+    toc: true
+    toc_float: true
+    code_folding: "hide"
+  pdf_document: default
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+---
+
+### Topic: Exploratory analysis to study High risk spots in NYC Area.
+
+<center>
+
+<h2>
+
+1.  INTRODUCTION
+
+    </h2>
+
+    </center>
+
+### Aim of Research:
+
+This research aims to shows the different prevalent crime in the city and the high risk area of the city. It also aims to show the areas that are predominantly prone to crime in the New York City area. In the last five (5) years, research shows that crime has been on the increase in the New York City metropolitan area thereby making it important to use predictive analytic method to examine pattern in crime statistics thereby locating hot spot area of the city. This research is useful to the police department when allocating resources efficiently when face with the task of budget cut and the predictive analysis policing can allow leadership of the police department to accurate staffing decision on where to have officers patrol during the shift. This topic is important because geospatial analysis can be used to identify crime hot spots so adequate attention can be given to those areas of the city that are prone to crime. Also, it will help New Yorkers to know the crime that are prevalent in different location and how to stay alert when they are around such location.
+
+<center>
+
+<h2>
+
+2.  LITERATURE REVIEW
+
+    </h2>
+
+    </center>
+
+Arrest in New York City over the years has been affected by a lot of factor which we would like to highlight in our study. We shall review a few of these factors in this research project. They include aggressive policing, hot spot policing, community policing, predictive policing and drug policing. Empirical evidence has supported there is a relationship between aggressive policing and increased crime rates and arrest in New York city. **Kane (2005)** examined NYC police precincts in the two lowest quartiles of income – extremely and highly disadvantaged communities relative to low disadvantaged communities. He found that over-policing occurred more often in extremely and highly disadvantaged communities relative to low disadvantaged communities. Further, police misconduct and over-policing were predictive of violent crime rates in extremely disadvantaged communities, whereas only police misconduct was predictive in highly disadvantaged communities.
+
+**Hot Spots Policing:** Hot spots policing entails targeting law enforcement efforts to high crime geographic locations. High risk Zones were chosen based on a disproportionate amount of crime that is concentrated within a few square 15 blocks. Zones varied in number and location; some were within precincts, while others were across precincts. In 2003, the NYPD initiated Operation Impact, which sent new police personnel to small geographic sub-areas, called Impact Zones (Smith & Purtell, 2007). A sub-variation of Operation Impact, Operation Trident, was used in East New York where crime patterns were more diffuse. Smith and Purtell (2007) evaluated the effects of Operation Impact, Trident, and special versions of Impact in two Bronx precincts on crime rates. From 2003 to 2006, Impact Zones were present in 30 of the 76 precincts at some time point. Using precinct level data from 1999 to 2006 and an interrupted time series model, they found a significant decline in rates of homicide, rape, robbery, assault and grand larceny but not burglary and MVT. The study did not include socio-demographic or crime relevant covariates, making it difficult to rule out competing explanations.
+
+**Community policing:** Community-oriented policing (COP) was initiated as a policing strategy in the 1980s when police began to realize that: citizen input was valuable, there was considerable tension between communities and the police, and there were significant criticisms about reactive policing strategies such as 911 responding (Smith & Bratton, 2001; Joanes, 2000). Joanes, (2000) assert that Community-oriented policing (COP) is collaborative. It involves police officers work closely with the community to find local solutions to local problems. It focuses on community police partnerships, decentralizes the police department, increases community involvement by police officers, provides greater discretion to individual officers, and incorporates strategies such as foot patrol. **(Eck & Maguire, 2006; Smith & Bratton; 2001; Travis & Waul, 2002)**, however found out that there is little evidence to support the effectiveness of COP. However, research has mainly focused on COP processes such as implementation rather than crime outcomes (Pate & Shtull, 1994).
+
+**Predictive policing:** is the use of analytic methods – often statistical and mathematical – to identify patterns in crime statistics. Often, this is used to find crime “hotspots” or areas where crime is extremely prevalent relative to other areas. **In Ellis Noerenberg (2021)**, Lowering crime in Manhattan assert that the use of predictive policing can be beneficial to police departments as they are stretched thin due to budget cuts from the current economic conditions. Predictive policing can allow leadership of departments efficiently make staffing decisions on where to have officers patrol during their shifts. Police departments have, for a long time, collected statistics as a way to determine progress in how they are doing year to year. But the statistics are mainly used in a retrospective capacity and not for any sort of predictive analytics. Predictive analytics can be use by the police department just as it’s been used by different parts of society for prediction of future occurrences. **Rosenfeld et al. (2007)** examined the impact of order-maintenance policing (measured by arrest rates for misdemeanors and ordinance violations) on robbery and homicide rates from 1988 to 2001. The authors accounted for several socio-demographic (i.e., socioeconomic disadvantage, residential instability, percent immigrants and percent Black) and crime relevant covariates at the precinct level. They found that order maintenance policing explained a four percent reduction in robbery rates and a ten percent reduction in homicide rates. **Corman and Mocan (2005)** found support for misdemeanor policing, measured by misdemeanor arrests, on 7 robbery, MVT, and grand larceny rates but not for homicide, assault, burglary, and rape rates. Drug and policing: Research has found that NYC police precincts with greater drug market activity had higher rates of order-maintenance policing, which in turn reduced homicides and robberies (Rosenfeld et al., 2007). However, research on policing aimed at narcotics has produced 30 divergent results. For instance, the Narcotics Initiative did not impact crime rates, controlled substance use arrest rates, or marijuana arrest rates in North Queens but reduced crime rates and increased marijuana arrest rates in Southeast Queens (McCabe, 2009).
+
+### Definition of Terms
+
+**Misdemeanors:** A Misdemeanor is an offense other than a traffic infraction of which a sentence in excess of 15 days but not greater than one year may be imposed. Just about half as many Felonies were reported as Misdemeanors.
+
+**A Felony:** is the most serious type of criminal charge In New York State. A felony is an offense for which a sentence to a term of imprisonment in excess of one year may be imposed.
+
+**A Violation:** is an offense other than a traffic infraction for which a sentence to a term of imprisonment of up to 15 days may be imposed. Many Violations go unreported due to its low severity. Harassment is a common form of violation.
+
+**Infraction:** Infraction are fine only offenses which can be referred to as minor violation. Criminal infractions are the least serious class of crimes, and they fall below misdemeanors and violation. Common type of infractions are traffic violation, jaywalking and loitering.
+
+<center>
+
+<h2>
+
+3.  METHODOLOGY
+
+    </h2>
+
+    </center>
+
+### Methodology:
+
+This project aims to explore and analyze the NYPD Arrests data to identify trends and patterns about arrests in New York City. The dataset to be use in this research is the NYPD Arrest Data and its gotten from the NYC Open data (NYPD Arrests Data (Historic). This is a breakdown of every arrest carry out in NYC by the NYPD going back to 2006 through the end of the previous calendar year. The dataset contains information about arrests made in NYC from 2006 to 2022, including the date and location of the arrest, the crime committed, and demographic information about the perpetrator. To analyze the data, we will perform a series of data cleaning and preprocessing steps to prepare the data for analysis. We will then perform exploratory data analysis to identify trends and patterns in the data and formulate questions that we would like to answer. Finally, we will build a shiny app using our latitude and longitude information to show the various location in the city that are high risk zone and the type of crime that are common in those areas.
+
+### Load the Required packages
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse) 
+library(ggplot2)
+library(leaflet)
+library(ggmap)
+library(leaflet.extras)
+library(htmltools)
+library(lubridate)
+library(ggrepel)
+library(plotly)
+library(stringr)
+#library(kableExtra)
+library(shiny)
+library(gridExtra)
+library(scales)
+library(readxl)
+```
+
+### The Data
+
+The data to be use for this project and the analysis was obtained from [NYPD Arrests Data (Historic)](https://data.cityofnewyork.us/Public-Safety/NYPD-Arrests-Data-Historic-/8h9b-rp9u/about_data). This is a breakdown of every arrest effected in NYC by the NYPD going back to 2006 through the end of the previous calendar year. The data contains 19 variables and 5.72Millions observations which I believe will help us explore the various high risk locations/precinct in the NYC. Because of the too large file size of this data, i decided to truncate it and look at the arrest data for the last five years from 2019 - 2023. We also truncate the dataset by reducing the original variables from the dataset from 19 to 12 as these are the variables needed for this report.
+
+#### Data Preparation:
+
+To prepare the data for this report we had to do some cleaning steps. This included selecting necessary columns while dropping unnecessary ones, completing variable names for better clarity, and reordering and condensing factor levels to make the visualizations more concise. Exact changes made to the data for each analysis are described below.
+
+Each row is a individual arrest.
+
+Each column represents a different tracked variable. We chose to keep 11 of them. These 11 are:
+
+ARREST_DATE = Exact date of arrest for the reported event
+
+OFNS_DESC = Description of internal classification corresponding with KY code (more general category than PD description)
+
+LAW_CAT_CD = Level of offense: felony, misdemeanor, violation
+
+ARREST_BORO = Borough of arrest. B(Bronx), S(Staten Island), K(Brooklyn), M(Manhattan), Q(Queens)
+
+ARREST_PRECINCT = Precinct where the arrest occurred
+
+JURISDICTION_CODE = Jurisdiction responsible for arrest. Jurisdiction codes 0(Patrol), 1(Transit) and 2(Housing) represent NYPD whilst codes 3 and more represent non NYPD jurisdictions
+
+AGE_GROUP = Perpetrator’s age within a category
+
+PERP_SEX = Perpetrator’s sex description
+
+PERP_RACE = Perpetrator’s race description
+
+Latitude = Latitude coordinate for Global Coordinate System, WGS 1984, decimal degrees (EPSG 4326)
+
+Longitude = Longitude coordinate for Global Coordinate System, WGS 1984, decimal degrees (EPSG 4326)
+
+### Load the Dataset
+
+The NYPD Arrest data was downloaded from the NYC Open data website and cleaned before uploading it to my [github] (<https://github.com/omocharly/DATA698_Research-Project/tree/main/mydata>)
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+nypd_arrests <- read_csv("https://raw.githubusercontent.com/omocharly/DATA698_Research-Project/refs/heads/main/mydata/NYPD%20Arrest%20Data%202019%20-2023.csv")
+```
+
+### Glimpse of the Dataset
+
+```{r}
+glimpse(nypd_arrests)
+```
+
+### Change the date format and rename the column borough.
+
+We clean the dataset by changing the format of some of the variables and also renaming some varible for better clarity during our analysis.
+
+**Change the format date from character to date and also rename the column Arrest Borough to full name of borough.**
+
+```{r}
+nypd_arrests <- nypd_arrests %>% 
+  mutate(ARREST_DATE = as.Date(ARREST_DATE, format = "%m/%d/%Y")) %>% 
+  mutate(ARREST_BORO = recode(ARREST_BORO, "B" = "Bronx")) %>% 
+  mutate(ARREST_BORO = recode(ARREST_BORO, "S" = "Staten Island")) %>%
+  mutate(ARREST_BORO = recode(ARREST_BORO, "K" = "Brooklyn")) %>%
+  mutate(ARREST_BORO = recode(ARREST_BORO, "M" = "Manhattan")) %>%
+  mutate(ARREST_BORO = recode(ARREST_BORO, "Q" = "Queens"))
+```
+
+### Clean and rename level of offences
+
+**Level of offences were named using just the first letter, I remaned it using the full name. I also renamed empty values as "Unspecified"**
+
+```{r}
+nypd_arrests <- nypd_arrests %>% 
+  mutate(LAW_CAT_CD = recode(LAW_CAT_CD, "F" = "Felony")) %>% 
+  mutate(LAW_CAT_CD = recode(LAW_CAT_CD, "M" = "Misdemeanor")) %>%
+  mutate(LAW_CAT_CD = recode(LAW_CAT_CD, "V" = "Violation")) %>%
+  mutate(LAW_CAT_CD = recode(LAW_CAT_CD, "I" = "Infraction")) %>%
+  mutate(LAW_CAT_CD = recode(LAW_CAT_CD, "9" = "Unspecified"))
+
+nypd_arrests[nypd_arrests$LAW_CAT_CD=="", "LAW_CAT_CD"] <- "Unspecified"
+nypd_arrests[nypd_arrests$LAW_CAT_CD=="(null)", "LAW_CAT_CD"] <- "Unspecified"
+table(nypd_arrests$LAW_CAT_CD)
+```
+
+### Clean and Rename Offence Description.
+
+**Offense descriptions have some blank and null values, so I named them as "Unspecified"**
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+nypd_arrests[nypd_arrests$OFNS_DESC=="", "OFNS_DESC"] <- "Unspecified"
+nypd_arrests[nypd_arrests$OFNS_DESC=="(null)", "OFNS_DESC"] <- "Unspecified"
+table(nypd_arrests$OFNS_DESC)
+```
+
+### Arrest by year:
+
+**Since 2020, there has been a steady increase in number of arrest in NYC since 2020. 2023 has the highest number of arrest of the five year under observation.**
+
+```{r message=FALSE, warning=FALSE}
+nypd_arrests$year <- year(nypd_arrests$ARREST_DATE) #extract year from date using the lubridate year() function
+
+nypd_arrests %>%
+        ggplot(aes(x=as.factor(year))) + geom_bar(stat='count', fill='purple') +
+        scale_y_continuous(labels=comma) + labs(x='Year', y='No of Arrest', title='Incidents by year') + 
+        geom_label(stat = "count", aes(label = ..count.., y = ..count..)) + 
+        theme(axis.title = element_text(size = 13), plot.title = element_text(size = 15,
+        hjust = 0.5), panel.background = element_rect(fill = "lemonchiffon")) +
+        labs(title = "Arrests by Year", y = "No of Arrest")
+```
+
+### Arrest by Quaters
+
+-   Fro the first year being examine, The first and the second quater have has the most arrest over the third and the forth quaters.
+
+```{r message=FALSE, warning=FALSE}
+library(viridis)
+nypd_arrests$quarter <- quarter(nypd_arrests$ARREST_DATE) #extract Quarters from date
+
+q1 <- nypd_arrests %>% filter(year!=2013) %>% select(year, quarter) %>% group_by(year) %>% count(quarter) %>%
+        ggplot(aes(x=as.factor(quarter), y=n, fill = quarter)) + 
+        geom_bar(stat='identity') + scale_y_continuous(labels=comma) + facet_grid(.~year) + 
+        labs(x='Quarter', y='Number of Arrests', title='Arrests by Quarter') 
+
+q1 + scale_fill_viridis() + theme(axis.title = element_text(size = 13),
+      plot.title = element_text(size = 15,
+      hjust = 0.5), panel.background = element_rect(fill = "lemonchiffon"))
+```
+
+### Arrest by weekdays
+
+\*From the five years being observed, suprisingly,the most arrest happens on Wednesday as suppose to weekends that have more activities.
+
+```{r}
+nypd_arrests$weekday <- wday(nypd_arrests$ARREST_DATE, label=TRUE)
+
+nypd_arrests %>% count(weekday) %>%
+        ggplot(aes(x=weekday, y=n)) + geom_bar(stat='identity', fill=rainbow(n=7)) +
+        scale_y_continuous(labels=comma) +
+        labs(x='Weekday', y='Number of Arrest', title='Arrests by Weekday') + 
+        theme(axis.title = element_text(size = 13),
+        plot.title = element_text(size = 15,
+        hjust = 0.5), panel.background = element_rect(fill = "lemonchiffon"))
+```
+
+### Arrest incident by borough
+
+***Brooklyn is the borough with the highest number of arrest***
+
+```{r}
+plotly::ggplotly(nypd_arrests %>% count(ARREST_BORO) %>%
+        ggplot(aes(x=reorder(ARREST_BORO, n), y=n, fill=n, text=ARREST_BORO)) +
+        geom_bar(stat='identity', fill='ORANGE') +
+        labs(x='', y='Number of Arrest'),
+        tooltip=c("text", "y"))
+```
+
+### Number of Arrest per Borough
+
+```{r}
+# get the count of arrests per year, by borough
+grouped_boro <- nypd_arrests %>% 
+  group_by(year, ARREST_BORO) %>% 
+  summarize(count = n()) %>% 
+  arrange(desc(count))
+head(grouped_boro)
+
+ggplot(grouped_boro, aes(x = reorder(year, -count), y = count, fill = ARREST_BORO)) + 
+  geom_bar(stat = 'identity', position = position_dodge()) +
+  scale_y_continuous(labels=function(x) format(x, big.mark = ",", scientific = FALSE), breaks = seq(0,120000,10000)) +
+  xlab("year") + ylab("total crime") + ggtitle("Crime by Borough Time Series") +
+  scale_fill_brewer(palette="green") + theme_minimal()
+```
+
+### Arrest by Offence Category
+
+**Misdemeanor is the most common offense that lead to an arrest within the five(5) years being review.**
+
+```{r}
+### Arrests by Offence Category
+arrests_by_offence <- nypd_arrests %>% 
+  group_by(LAW_CAT_CD) %>%
+  summarise(number_of_arrests = n())
+ggplot(arrests_by_offence, aes(x = number_of_arrests, y = reorder(LAW_CAT_CD, -number_of_arrests), fill = LAW_CAT_CD)) +
+  geom_col(position = position_dodge()) +
+  geom_text(aes(label = number_of_arrests), vjust = -0.5, hjust = 0.5, size = 3) +
+  scale_fill_manual(breaks = c("Misdemeanor", "Felony", "Violation", "Infraction", "Unspecified"),
+          values = c("#039fe0", "#Ffff00", "#f7941d","#00ff00", "#800080")) +
+  labs(x = "number_of_arrests",
+       y = "Offence Category",
+       title = "Arrests by Offence Category") +
+  
+  coord_flip()
+```
+
+### Arrest Incident by Age Group
+
+**The age category with the most arrest is the age group (25-44) years. This age group has more than half of the arrest made within the age group under review.**
+
+```{r}
+arrests_by_age <- nypd_arrests %>% 
+  group_by(AGE_GROUP) %>%
+  summarise(number_of_arrests = n())
+ggplot(arrests_by_age, aes(x = number_of_arrests, y = reorder(AGE_GROUP, -number_of_arrests), fill = AGE_GROUP)) +
+  geom_col(position = position_dodge()) +
+  geom_text(aes(label = number_of_arrests), vjust = -0.5, hjust = 0.5, size = 3) +
+  scale_fill_manual(breaks = c("<18", "18-24", "25-44", "45-64", "65+"),
+                    values = c("#039fe0", "#Ffff00", "#f7941d",
+                               "#00ff00", "#800080")) +
+  labs(x = "number_of_arrests",
+       y = "Age Group",
+       title = "Arrests by Age Group") +
+  
+  coord_flip()
+```
+
+### Arrests by Race
+
+** The black has the highest amount of arrest. Thereby making the black community the most prown to crime in the New york city.**
+
+```{r}
+nypd_arrests |> 
+  mutate(PERP_RACE = if_else(PERP_RACE == "AMERICAN INDIAN/ALASKAN NATIVE", 
+                             "AMERICAN INDIAN", PERP_RACE)) |>
+  mutate(PERP_RACE = if_else(PERP_RACE == "ASIAN / PACIFIC ISLANDER", 
+                             "ASIAN", PERP_RACE)) |>
+  mutate(LAW_CAT_CD = fct_collapse(LAW_CAT_CD,
+               Felony = "F",
+               Misdemeanor = "M",
+               Violation = c("V", "I")),
+         LAW_CAT_CD = fct_relevel(LAW_CAT_CD, 
+               c("Felony", "Misdemeanor", "Violation")),
+         PERP_SEX = if_else(PERP_SEX == "M", "Male", "Female")) |>
+  ggplot(aes(x = LAW_CAT_CD, fill = PERP_RACE)) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels = label_percent()) +
+  scale_fill_viridis_d(option = "A") +
+  facet_wrap(facets = vars(PERP_SEX)) +
+  labs(title = "Level of Offense by Perpetrator Race and Gender",
+       x = "Level of Offense", 
+       y = "Proportion of Perpetrators",
+       fill = "Perpetrator Race")
+
+nypd_arrests |> 
+  mutate(PERP_RACE = if_else(PERP_RACE == "AMERICAN INDIAN/ALASKAN NATIVE", 
+                             "AMERICAN INDIAN", PERP_RACE)) |>
+  mutate(PERP_RACE = if_else(PERP_RACE == "ASIAN / PACIFIC ISLANDER", 
+                             "ASIAN", PERP_RACE)) |>
+  mutate(LAW_CAT_CD = fct_collapse(LAW_CAT_CD,
+               Felony = "F",
+               Misdemeanor = "M",
+               Violation = c("V", "I")),
+         LAW_CAT_CD = fct_relevel(LAW_CAT_CD, 
+               c("Felony", "Misdemeanor", "Violation")),
+         PERP_SEX = if_else(PERP_SEX == "M", "Male", "Female")) |>
+  ggplot(aes(x = LAW_CAT_CD, fill = PERP_RACE)) +
+  geom_bar() +
+  scale_fill_viridis_d(option = "A") +
+  facet_wrap(facets = vars(PERP_SEX)) +
+  labs(title = "Level of Offense by Perpetrator Race and Gender",
+       x = "Level of Offense", 
+       y = "Number of Perpetrators",
+       fill = "Perpetrator Race")
+
+nypd_arrests |>
+  mutate(PERP_RACE = if_else(PERP_RACE == "AMERICAN INDIAN/ALASKAN NATIVE", 
+                             "AMERICAN INDIAN", PERP_RACE)) |>
+  mutate(PERP_RACE = if_else(PERP_RACE == "ASIAN / PACIFIC ISLANDER", 
+                             "ASIAN", PERP_RACE)) |>
+  mutate(LAW_CAT_CD = fct_collapse(LAW_CAT_CD,
+               Felony = "F",
+               Misdemeanor = "M",
+               Violation = c("V", "I")),
+         LAW_CAT_CD = fct_relevel(LAW_CAT_CD, 
+               c("Felony", "Misdemeanor", "Violation"))) |>
+  filter(OFNS_DESC == "ASSAULT 3 & RELATED OFFENSES") |>
+  ggplot(aes(x = LAW_CAT_CD, fill = PERP_RACE)) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels = label_percent()) +
+  scale_fill_viridis_d(option = "A") +
+  labs(title = "Level of Offense by Perpetrator Race for Assault",
+       x = "Level of Offense", 
+       y = "Proportion of Perpetrators",
+       fill = "Perpetrator Race")
+
+nypd_arrests |>
+  mutate(PERP_RACE = if_else(PERP_RACE == "AMERICAN INDIAN/ALASKAN NATIVE", 
+                             "AMERICAN INDIAN", PERP_RACE)) |>
+  mutate(PERP_RACE = if_else(PERP_RACE == "ASIAN / PACIFIC ISLANDER", 
+                             "ASIAN", PERP_RACE)) |>
+  mutate(LAW_CAT_CD = fct_collapse(LAW_CAT_CD,
+               Felony = "F",
+               Misdemeanor = "M",
+               Violation = c("V", "I")),
+         LAW_CAT_CD = fct_relevel(LAW_CAT_CD, 
+               c("Felony", "Misdemeanor", "Violation"))) |>
+  filter(OFNS_DESC == "PETIT LARCENY") |>
+  ggplot(aes(x = LAW_CAT_CD, fill = PERP_RACE)) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels = label_percent()) +
+  scale_fill_viridis_d(option = "A") +
+  labs(title = "Level of Offense by Perpetrator Race for Petit Larceny",
+       x = "Level of Offense", 
+       y = "Proportion of Perpetrators",
+       fill = "Perpetrator Race")
+
+numeric_law <- nypd_arrests |>
+  mutate(LAW_CAT_CD = fct_collapse(LAW_CAT_CD,
+               "1" = "F",
+               "2" = "M",
+               "3" = c("V", "I"))) |>
+  mutate(LAW_CAT_CD = as.numeric(LAW_CAT_CD)) |>
+  mutate(PERP_SEX = if_else(PERP_SEX == "M", 1, 0))
+  
+```
+
+### Top 10 most common crimes for the 2019-2023 Arrest
+
+```{r}
+crime_counts <- nypd_arrests %>% 
+  group_by(OFNS_DESC) %>% 
+  summarize(count = n()) %>% 
+  arrange(desc(count))
+head(crime_counts)
+```
+
+```{r}
+ggplot(crime_counts %>% top_n(10), aes(x = reorder(OFNS_DESC, -count), y = count)) + 
+  geom_bar(stat = 'identity', fill= 'violet') + 
+  scale_y_continuous(labels=function(x) format(x, big.mark = ",", scientific = FALSE), breaks = seq(0,300000,50000)) +
+  geom_text(aes(label = count), hjust = 1.25, color='black') +
+  coord_flip() + 
+  xlab("offense") + ylab("count")  + ggtitle("Top 10 Most Common Crimes 2014-2018") +
+  theme(axis.text.x = element_text(size=10), axis.text.y = element_text(size=8))
+```
+
+### No of Crime per Borough per age Distribution
+
+```{r}
+theme_set(theme_classic())
+# Plot
+g <- ggplot(nypd_arrests, aes(ARREST_BORO))
+g + geom_density(aes(fill=factor(AGE_GROUP)), alpha=0.8) + 
+    labs(title="Density plot", 
+         subtitle="Number of crimes per boro per age group distribution",
+         caption="Source: nypd_arrests",
+         x="Borough",
+         fill="Age group")
+```
+
+### Leaflet Map
+
+The leaflet map shows the map of nyc showing the area where robbery arrest occurs. Thereby, showing a hot zone area of the city.
+
+```{r}
+# filter the datasets for each year
+arrests_2019 <- nypd_arrests %>% filter(year(ARREST_DATE) == 2019)
+arrests_2020 <- nypd_arrests %>% filter(year(ARREST_DATE) == 2020)
+arrests_2021 <- nypd_arrests %>% filter(year(ARREST_DATE) == 2021)
+arrests_2022 <- nypd_arrests %>% filter(year(ARREST_DATE) == 2022)
+arrests_2023 <- nypd_arrests %>% filter(year(ARREST_DATE) == 2023)
+
+
+# Instantiate a leaflet map and plot map
+arrest_map <- leaflet() %>% addTiles() %>% 
+  setView(lng = -73.935242, lat = 40.730610 , zoom = 12 ) %>%
+  addCircleMarkers(data = arrests_2019, lng = ~Longitude, lat = ~Latitude, radius = 1,
+                   popup = ~paste0("Incident Date: ", ARREST_DATE, "<br>", "OFFENCE: ", OFNS_DESC = "ROBBERY"),
+                   color = "magenta",
+                   group = "2019") %>%
+  addCircleMarkers(data = arrests_2020, lng = ~Longitude, lat = ~Latitude, radius = 1,
+                   popup = ~paste0("Incident Date: ", ARREST_DATE, "<br>", "OFFENCE: ", OFNS_DESC = "ROBBERY"),
+                   color = "blue",
+                   group = "2020") %>% 
+  addCircleMarkers(data = arrests_2021, lng = ~Longitude, lat = ~Latitude, radius = 1,
+                   popup = ~paste0("Incident Date: ", ARREST_DATE, "<br>", "OFFENCE: ", OFNS_DESC = "ROBBERY"),
+                   color = "green",
+                   group = "2021") %>% 
+  addCircleMarkers(data = arrests_2022, lng = ~Longitude, lat = ~Latitude, radius = 1,
+                   popup = ~paste0("Incident Date: ", ARREST_DATE, "<br>", "OFFENCE: ", OFNS_DESC = "ROBBERY"),
+                   color = "brown",
+                   group = "2022") %>% 
+  addCircleMarkers(data = arrests_2023, lng = ~Longitude, lat = ~Latitude, radius = 1,
+                   popup = ~paste0("Incident Date: ", ARREST_DATE, "<br>", "OFFENCE: ", OFNS_DESC = "ROBBERY"),
+                   color = "purple",
+                   group = "2023") %>% 
+  
+  addLayersControl(baseGroups = c("2019", "2020", "2021", "2022", "2023")) 
+
+# display the chart
+arrest_map
+```
+
+<center>
+
+<h2>
+
+4.  CONCLUSION
+
+    </h2>
+
+    </center>
+    
+From the work shown in this project, we were able to show the various category of arrest that occurs in NYC from 2019 till 2023. This work also shows the geographical locations of where this arrest occurs, the type of arrest that occurs in different area and the different exploratory analysis showing how race, gender, age-group, crime category, location are  related with the arrest made within this period under review. Hence, we were able to put this in a leaflet map to show the likely hot zone area of the city. 
+    
+    
